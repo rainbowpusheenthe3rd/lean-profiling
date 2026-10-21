@@ -41,6 +41,59 @@ sections, e.g. `ProfileReport(df, plot={"histogram": {"bins": 20}}, samples={"he
 - [`generate.py`](examples/titanic/generate.py) is the script that made them:
   `python examples/titanic/generate.py`.
 
+An excerpt of the generated `profiling.json`, cut down to a few fields:
+
+```json
+{
+    "table": {
+        "n": 891,
+        "n_var": 12,
+        "n_cells_missing": 866,
+        "p_cells_missing": 0.08099513655069211,
+        "n_duplicates": 0,
+        "types": {
+            "Numeric": 5,
+            "Categorical": 4,
+            "Text": 3
+        }
+    },
+    "variables": {
+        "Age": {
+            "type": "Numeric",
+            "n": 891,
+            "count": 714,
+            "n_missing": 177,
+            "p_missing": 0.19865319865319866,
+            "n_distinct": 88,
+            "mean": 29.69911764705882,
+            "std": 14.526497332334042,
+            "min": 0.42,
+            "5%": 4.0,
+            "25%": 20.125,
+            "50%": 28.0,
+            "75%": 38.0,
+            "95%": 56.0,
+            "max": 80.0,
+            "skewness": 0.38910778230082693,
+            "kurtosis": 0.1782741536421022,
+            "n_zeros": 0,
+            "monotonic": 0
+        }
+    },
+    "alerts": [
+        "[Sex] is highly overall correlated with [Survived]",
+        "[Survived] is highly overall correlated with [Sex]",
+        "[Age] 177 (19.9%) missing values",
+        "[Cabin] 687 (77.1%) missing values"
+    ]
+}
+```
+
+The full file has the same top-level keys as ydata-profiling's: `analysis`, `table`, `variables` (every
+statistic per column, including value counts and histograms), `correlations`, `alerts`, `sample`,
+`duplicates`, and the chart SVGs under `scatter` and `missing`. The charts make up most of its 1.4 MB,
+which is too large for GitHub to preview, so open it with **Raw**.
+
 ![Titanic report: overview and first variables](examples/titanic/screenshots/overview.png)
 
 ![Titanic report: interactions and correlations](examples/titanic/screenshots/interactions-correlations.png)
