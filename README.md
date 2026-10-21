@@ -12,6 +12,9 @@ lean-profiling installs pandas and what pandas needs, and nothing else:
 pandas, numpy, python-dateutil, pytz, six, tzdata
 ```
 
+That's with pandas 2. pandas 3 no longer needs `pytz`, so it's five packages. Both are supported and tested;
+ydata-profiling itself pins `pandas<3`.
+
 ## Usage
 
 The API matches ydata-profiling's `ProfileReport`, so switching is a one-line import change:

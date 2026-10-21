@@ -89,8 +89,8 @@ def spearman(x: pd.Series, y: pd.Series) -> float:
         return math.nan
     rx = pd.Series(x.to_numpy()[valid]).rank().to_numpy(dtype=float)
     ry = pd.Series(y.to_numpy()[valid]).rank().to_numpy(dtype=float)
-    rx -= rx.mean()
-    ry -= ry.mean()
+    rx = rx - rx.mean()
+    ry = ry - ry.mean()
     denom = math.sqrt(float((rx * rx).sum() * (ry * ry).sum()))
     if denom == 0:
         return math.nan
