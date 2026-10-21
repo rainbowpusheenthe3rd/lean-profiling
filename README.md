@@ -32,9 +32,23 @@ report.to_file("report.html")
 `minimal=True` work as in ydata-profiling. Settings are keyword arguments, using nested dicts for nested
 sections, e.g. `ProfileReport(df, plot={"histogram": {"bins": 20}}, samples={"head": 5})`.
 
+## Example: Titanic
+
+[`examples/titanic`](examples/titanic) profiles Kaggle's Titanic passenger list (891 rows, 12 columns):
+
+- [`report.html`](examples/titanic/report.html) is the report. [View it in the browser](https://htmlpreview.github.io/?https://github.com/rainbowpusheenthe3rd/lean-profiling/blob/main/examples/titanic/report.html), or download it and open it locally.
+- [`profiling.json`](examples/titanic/profiling.json) is the JSON description.
+- [`generate.py`](examples/titanic/generate.py) is the script that made them:
+  `python examples/titanic/generate.py`.
+
+![Titanic report: overview and first variables](examples/titanic/screenshots/overview.png)
+
+![Titanic report: interactions and correlations](examples/titanic/screenshots/interactions-correlations.png)
+
 ## How close is it?
 
-On the test datasets, the statistics are identical to ydata-profiling 4.18.4: every field of `table`,
+On three test datasets (Titanic, a synthetic training table and a set of edge cases), the statistics are
+identical to ydata-profiling 4.18.4: every field of `table`,
 `variables`, `correlations`, `alerts`, `duplicates` and `sample` in `profiling.json` matches. That includes
 the chi-square p-values, histograms, Spearman/Cramér's V correlations, Unicode summaries and type
 inference. The JSON has the same keys in the same order.
