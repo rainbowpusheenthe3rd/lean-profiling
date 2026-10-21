@@ -43,6 +43,16 @@ class TestStats(unittest.TestCase):
         self.assertAlmostEqual(stats.spearman(x, y), 0.8)
 
 
+class TestChiSquared(unittest.TestCase):
+    def test_integer_columns_keep_integer_binning(self):
+        # numpy's "auto" bins are at least 1 wide for integer input, so the dtype must not change.
+        df = pd.DataFrame({"n": [0] * 600 + [1] * 200 + [2] * 30 + [3] * 15 + [4] * 15 + [8] * 7})
+        stat = json.loads(ProfileReport(df).to_json())["variables"]["n"]["chi_squared"]["statistic"]
+        values = df["n"].to_numpy()
+        counts, _ = np.histogram(values, bins=np.histogram_bin_edges(values, bins="auto"))
+        self.assertAlmostEqual(stat, stats.chisquare(counts)["statistic"])
+
+
 class TestTypeInference(unittest.TestCase):
     def setUp(self):
         self.config = Settings.build()

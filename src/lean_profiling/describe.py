@@ -205,7 +205,7 @@ def describe_numeric(config: Settings, series: pd.Series, summary: dict) -> None
         warnings.simplefilter("ignore", RuntimeWarning)
         summary["mad"] = np.median(np.abs(present - np.median(present)))
     if config.vars.num.chi_squared_threshold > 0.0:
-        summary["chi_squared"] = chi_square(np.asarray(finite, dtype=float))
+        summary["chi_squared"] = chi_square(np.asarray(finite))  # keep the dtype: numpy bins integers differently
     summary["range"] = summary["max"] - summary["min"]
     summary.update(
         {f"{q:.0%}": v for q, v in series.quantile(config.vars.num.quantiles).to_dict().items()}
