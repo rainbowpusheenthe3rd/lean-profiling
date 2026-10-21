@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lean-profiling"
+version = "1.0.0"
+description = "ydata-profiling's report and profiling.json, rebuilt on pandas and numpy only."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.22",
+]
+
+[project.urls]
+Repository = "https://github.com/rainbowpusheenthe3rd/lean-profiling"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lean_profiling = ["assets/*"]
